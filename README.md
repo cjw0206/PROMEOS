@@ -17,19 +17,20 @@
   <b>(c)</b> Protein sequences are tokenized, truncated, and encoded using ESM-2; the resulting embeddings are reshaped to match the GO embedding dimension.
 </p>
 
-## About
-PROMEOS applies [your method/approach] to address [research problem].  
-This repository provides:
-- Data preprocessing
-- Model training and evaluation
-- End-to-end reproducibility of results
+## ⚙Requirements
 
----
+- **Python**: 3.9  
+- **PyTorch**: 2.1.2 (with CUDA 12.1 support)  
+- **torchvision**: 0.16.2  
+- **torchaudio**: 2.1.2  
+- **transformers**: 4.51.3  
+- **tokenizers**: 0.21.1  
+- **numpy**: 1.26.3  
+- **pandas**: 2.2.3  
+- **scikit-learn**: 1.6.1  
+- **scipy**: 1.13.1  
+- **matplotlib**: 3.9.4  
+- **seaborn** (optional, if used for plotting)  
+- **tqdm**: 4.67.1  
 
-## Installation
-Clone this repository and install the required dependencies:
 
-```bash
-git clone https://github.com/<your-username>/PROMEOS.git
-cd PROMEOS
-pip install -r requirements.txt
