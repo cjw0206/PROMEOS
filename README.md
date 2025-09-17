@@ -1,10 +1,12 @@
 # PROMEOS
 
-**PROMEOS** is the official implementation of [short description: e.g., "a Transformer-based model for protein-protein interaction prediction"].  
-This repository is released to support reproducibility and further research on [project/paper name].
+**PROMEOS** is protein‑protein interaction prediction using a Mixture of Experts and multimodal learning by integrating Ontology and Sequences.
 
 
----
+## Model Architecture
+
+![Model Architecture](Overall_Workflow.jpg)
+
 
 ## About
 PROMEOS applies [your method/approach] to address [research problem].  
