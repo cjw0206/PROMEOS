@@ -17,7 +17,7 @@
   <b>(c)</b> Protein sequences are tokenized, truncated, and encoded using ESM-2; the resulting embeddings are reshaped to match the GO embedding dimension.
 </p>
 
-## ⚙Requirements
+## Requirements
 
 - **Python**: 3.9  
 - **PyTorch**: 2.1.2 (with CUDA 12.1 support)  
