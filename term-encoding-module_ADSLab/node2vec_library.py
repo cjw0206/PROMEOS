@@ -3,10 +3,10 @@ import networkx as nx
 import os
 
 # 폴더 미리 생성
-os.makedirs("../datasets/ADSLab_dataset/go-terms/emb/", exist_ok=True)
+os.makedirs("../datasets/STRING_dataset/go-terms/emb/", exist_ok=True)
 
 # 그래프 로딩
-G = nx.read_edgelist("../datasets/ADSLab_dataset/go-terms/graph/go-terms.edgelist", create_using=nx.DiGraph())
+G = nx.read_edgelist("../datasets/STRING_dataset/go-terms/graph/go-terms.edgelist", create_using=nx.DiGraph())
 
 # Node2Vec 모델 정의
 model = Node2Vec(
@@ -20,4 +20,4 @@ model = Node2Vec(
 
 # 학습 및 저장
 wv_model = model.fit(window=10, min_count=1)
-wv_model.wv.save_word2vec_format("../datasets/ADSLab_dataset/go-terms/emb/go-terms-64.emd")
+wv_model.wv.save_word2vec_format("../datasets/STRING_dataset/go-terms/emb/go-terms-64.emd")

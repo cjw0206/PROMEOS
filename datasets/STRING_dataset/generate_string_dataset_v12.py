@@ -56,22 +56,6 @@ def generate_dataset(protein_links_path, poz_intr_file_name, neg_intr_file_name,
 
     print("Generating NEGATIVE interactions that do not appear in STRING-DB (regardless of confidence score)...")
     negative_intr = generate_negatives_fast(pozitive_intr)
-    # while len(negative_intr) < len(pozitive_intr):
-    #     protA, protB = random.sample(poz_proteins, 2)
-    #
-    #     if (protA, protB) in negative_intr or (protB, protA) in negative_intr:
-    #         continue
-    #
-    #     if protA not in intr_sets[protB]:
-    #         negative_intr.append((protA, protB))
-    #         neg_proteins.append(protA)
-    #         neg_proteins.append(protB)
-    #
-    #         if len(negative_intr) % 20000 == 0:
-    #             print("Negative interactions added: ", len(negative_intr), f"/{len(pozitive_intr)}")
-    #
-    # print('Total number of negative interactions:', len(negative_intr))
-    # print('Total number of proteins in the selected negative interactions:', len(set(neg_proteins)), "\n")
 
     print('Saving NEGATIVE interactions to files...')
     save_interactions(neg_intr_file_name, negative_intr)
@@ -79,21 +63,18 @@ def generate_negatives_fast(positive_pairs):
     from itertools import combinations
 
     print("Generating candidate negative pairs...")
-    # 중복 제거된 protein 목록
     proteins = list(set([p for pair in positive_pairs for p in pair]))
 
-    # 모든 가능한 조합 (unordered pair)
+    # possbile paris
     all_pairs = set(combinations(proteins, 2))  # (A, B) with A < B
 
-    # positive pair도 (A, B)로 정렬해서 set으로
     positive_set = set(tuple(sorted(pair)) for pair in positive_pairs)
 
-    # negative 후보 = 전체 조합 - positive
+    # negative candidate
     candidate_negatives = list(all_pairs - positive_set)
 
     print(f"Total candidate negatives: {len(candidate_negatives)}")
 
-    # 무작위로 섞고 앞에서부터 뽑기
     random.shuffle(candidate_negatives)
     selected_negatives = candidate_negatives[:len(positive_pairs)]
 
@@ -114,6 +95,7 @@ if __name__ == "__main__":
     poz_output = f'{folder}/{organism}.protein.links.v{version}.txt'
     neg_output = f'{folder}/{organism}.protein.negative.v{version}.txt'
 
+    ### optional
     # url = f'https://stringdb-static.org/download/protein.links.v{version}/{organism}.protein.links.v{version}.txt.gz'
     # Path("stringDB-files").mkdir(parents=True, exist_ok=True)
     # download_file(url, link_file)

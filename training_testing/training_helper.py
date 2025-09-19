@@ -4,29 +4,10 @@ import torch
 import torch.nn as nn
 import torch.utils.data as data
 from torch.nn.utils.rnn import pad_sequence
-from torch.utils.tensorboard import SummaryWriter
-from sklearn.metrics import roc_auc_score
 
 
 # %%
 def batch_padding_collate_fn(batch, MAX_LEN_SEQ, global_padd=False, emb_dim=128):
-    """ Function that remodels each batch of data before
-    input to the LSTM model
-
-    Args:
-        batch (tuple):  #batch_features:  Shape N * ( [protALen, node2vecDim], [protBLen, node2vecDim] )
-                        #batch_ids:       Shape N * ( [1, protALen], [1, protBLen] )
-                        #batch_labels:    Shape N * [ 1 or 0]
-
-        global_padd(bool): whether we are padding to the longest GO-set in dataset or the longest in batch
-
-    Returns:
-    tensor: padded proteins of shape N * 2(protein pair) * L(longest seq) * Emb dim
-    tensor: batch labels of   shape N * [ 1 or 0]
-    tensor: batch lengths of each protein A: e.g [22,10, ...] length N
-    tensor: batch lengths of each protein B
-    tensor: batch_ids of      shape N * ( [1, protALen], [1, protBLen] )
-    """
 
     batch_features, batch_labels, batch_ids = zip(*batch)
     batch_features = np.array(batch_features)
@@ -63,21 +44,7 @@ def batch_padding_collate_fn(batch, MAX_LEN_SEQ, global_padd=False, emb_dim=128)
 
 
 # %%
-def transformerGO_collate_fn(batch, max_size_set, emb_size=64, pytorch_pad=False):
-    """ Function that remodels each batch of data before
-    input to the transformer model
-
-    Args:
-        batch (tuple):  #batch_features:  Shape N * ( [protALen, node2vecDim], [protBLen, node2vecDim] )
-                        #batch_ids:       Shape N * ( [1, protALen], [1, protBLen] )
-                        #batch_labels:    Shape N * [ 1 or 0]
-
-    Returns:
-    tensor: padded proteins of shape N * 2(protein pair) * L(longest seq) * Emb dim
-    tensor: batch labels of   shape N * [ 1 or 0]
-    tensor: padding of        shape N * 2 * L * L
-    tensor: batch_ids of      shape N * ( [1, protALen], [1, protBLen] )
-    """
+def PROMEOS_collate_fn(batch, max_size_set, emb_size=64, pytorch_pad=False):
 
     batch_features, batch_labels, batch_ids = zip(*batch)
     # batch_features = np.array((batch_features), dtype=object)

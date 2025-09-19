@@ -102,7 +102,7 @@ def save_go_process(terms_for_node2vec, save_path = 'go_namespace_dict'):
         pickle.dump(go_namespace_dict, fp, protocol=pickle.HIGHEST_PROTOCOL)
     return
 
-folder_path = '../datasets/ADSLab_dataset/go-terms/'
+folder_path = '../datasets/STRING_dataset/go-terms/'
 terms_for_node2vec = obo_csv_trim(csv_path = folder_path + 'go-basic.obo.csv')
 save_go_mapping(terms_for_node2vec, save_path = folder_path + 'go_id_dict')
 

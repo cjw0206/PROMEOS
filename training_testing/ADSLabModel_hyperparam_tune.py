@@ -29,7 +29,7 @@ print("Program started at:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 # Custom imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from protein_ppi_encoding_module.transformerGO_ffn_moe import *
+from Models.PROMEOS_model import *
 from datasets.dataset_manip import *
 from training_helper import *
 
@@ -67,7 +67,7 @@ elif dataset_name in ['STRING_M']:
     N_EPOCHS = 50
     organism = 10090
     
-data_path = '../datasets/ADSLab_dataset/'
+data_path = '../datasets/STRING_dataset/'
 
 # 공통 경로 설정
 go_embed_pth = f"{data_path}go-terms/emb/go-terms-{EMB_DIM}.emd"

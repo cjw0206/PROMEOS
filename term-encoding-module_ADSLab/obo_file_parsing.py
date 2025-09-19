@@ -83,7 +83,7 @@ def obo_dict_to_pandas(obo_dict, unique_tags):
     
     return obo_panda
 
-filename = '../datasets/ADSLab_dataset/go-terms/go-basic.obo'
+filename = '../datasets/STRING_dataset/go-terms/go-basic.obo'
 obo_dict, unique_tags = obo_file_to_dict(filename)
 obo_panda = obo_dict_to_pandas(obo_dict, unique_tags)
 obo_panda.to_csv(filename + ".csv", index=False)
