@@ -5,7 +5,7 @@
 ## Model Architecture
 
 <p align="center">
-  <img src="Overall_Workflow.jpg" alt="PROMEOS Architecture" width="600"/>
+  <img src="Model_Architecture.jpg" alt="PROMEOS Architecture" width="600"/>
 </p>
 
 <p align="left">
