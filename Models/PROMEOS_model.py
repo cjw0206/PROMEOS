@@ -14,11 +14,11 @@ class PROMEOS(nn.Module):
         super().__init__()
 
         c = copy.deepcopy
-        attn = MultiHeadedAttention(nhead, d_model, dropout)
+        attn = MultiHeadAttention(nhead, d_model, dropout)
         ff = Top1SparseMoEFFN(d_model, dim_feedforward, num_experts=num_experts, dropout=dropout)
         self.using_esm2 = using_esm2
 
-        self.cross_attn = MultiHeadedAttention(nhead, d_model, dropout)
+        self.cross_attn = MultiHeadAttention(nhead, d_model, dropout)
         self.fusion_proj = nn.Linear(d_model * 2, d_model)
 
         self.encoder = Encoder(EncoderLayer_ffn_moe(d_model, c(attn), c(ff), dropout), num_layers)

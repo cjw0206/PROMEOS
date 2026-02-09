@@ -7,7 +7,7 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 import torch.utils.data as data
-from tqdm import tqdm as prog_bar
+from tqdm import tqdm
 from sklearn.metrics import roc_auc_score
 from datetime import datetime
 import random
@@ -109,7 +109,7 @@ train_set, valid_set, test_set, _ = get_dataset_split_stringDB_keep_ratio(
 
 def helper_collate(batch):
     MAX_LEN_SEQ = get_max_len_seq(batch)
-    return transformerGO_collate_fn(batch, MAX_LEN_SEQ, EMB_DIM, pytorch_pad=False)
+    return PROMEOS_collate_fn(batch, MAX_LEN_SEQ, EMB_DIM, pytorch_pad=False)
 
 params = {'batch_size': BATCH_SIZE, 'collate_fn': helper_collate}
 train_loader = data.DataLoader(train_set, **params, shuffle=True)
@@ -120,7 +120,7 @@ test_loader = data.DataLoader(test_set, **params, shuffle=False)
 def train(model, loader, optimizer, criterion):
     model.train()
     total_loss, total_acc, preds, labels = 0, 0, [], []
-    for batch in prog_bar(loader):
+    for batch in tqdm(loader):
         optimizer.zero_grad()
         padded_pairs, y, mask = batch[0].to(device), batch[1].to(device), batch[2].to(device)
         protA_seq, protB_seq = batch[4], batch[5]
@@ -174,8 +174,7 @@ for experts in experts_list:
             save_dir = os.path.join("saved_models", model_id)
             os.makedirs(save_dir, exist_ok=True)
 
-            model = TransformerGO_matmul(EMB_DIM, 8, 3, 4 * EMB_DIM, dropout,using_esm2=True, num_experts=experts).to(device)
-            # model = TransformerGO_Scratch(EMB_DIM, 8, 3, 4*EMB_DIM, 0.1, using_esm2=True, num_experts=experts).to(device)   # W Decoder
+            model = PROMEOS(EMB_DIM, 8, 3, 4 * EMB_DIM, dropout,using_esm2=True, num_experts=experts).to(device)
             total_params = sum(p.numel() for p in model.parameters())
             trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
             print(f"Total parameters: {total_params:,}")

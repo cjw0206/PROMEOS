@@ -1,4 +1,3 @@
-# # %%
 # @inproceedings{opennmt,
 #   author    = {Guillaume Klein and
 #                Yoon Kim and
@@ -12,14 +11,11 @@
 #   doi       = {10.18653/v1/P17-4012}
 # }
 
-# %%
 import torch
 import torch.nn as nn
 import math, copy, time
 import torch.nn.functional as F
 
-
-# %%
 def clones(module, N):
     "Produce N identical layers."
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
@@ -57,7 +53,6 @@ class SublayerConnection(nn.Module):
         return x + self.dropout(sublayer(self.norm(x)))
 
 
-# %%
 class Encoder(nn.Module):
     "Core encoder is a stack of N layers"
 
@@ -69,15 +64,14 @@ class Encoder(nn.Module):
     def forward(self, x, mask):
         total_aux_loss = 0.0
 
-        # 첫 입력이 (Tensor, aux_loss) 튜플인 경우 방지 (예외 상황)
         if isinstance(x, (tuple, list)):
             x = x[0]
 
         for layer in self.layers:
-            x, aux_loss = layer(x, mask)  # 항상 tuple 반환 가정
+            x, aux_loss = layer(x, mask)
             total_aux_loss += aux_loss
 
-        x = self.norm(x)  # x는 반드시 tensor
+        x = self.norm(x)
         return x, total_aux_loss
 
 
@@ -113,7 +107,6 @@ class Decoder(nn.Module):
     def forward(self, x, memory, src_mask, tgt_mask):
         total_aux_loss = 0.0
 
-        # 혹시 x가 [tensor, aux_loss] 형태일 수 있으므로 방지
         if isinstance(x, (list, tuple)):
             x = x[0]
 
@@ -123,7 +116,6 @@ class Decoder(nn.Module):
 
         x = self.norm(x)
         return x, total_aux_loss
-
 
 
 class DecoderLayer_ffn_moe(nn.Module):
@@ -143,7 +135,7 @@ class DecoderLayer_ffn_moe(nn.Module):
         x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, tgt_mask))
         x = self.sublayer[1](x, lambda x: self.src_attn(x, m, m, src_mask))
 
-        # Top-1 Sparse MoE FFN 분기
+        # Top-1 Sparse MoE FFN
         if isinstance(self.feed_forward, Top1SparseMoEFFN):
             ff_out, aux_loss = self.feed_forward(x)
             x = self.sublayer[2](x, lambda _: ff_out)
@@ -152,8 +144,6 @@ class DecoderLayer_ffn_moe(nn.Module):
             x = self.sublayer[2](x, self.feed_forward)
             return [x, 0.0]
 
-
-# %%
 def attention(query, key, value, mask=None, dropout=None):
     "Compute 'Scaled Dot Product Attention'"
     d_k = query.size(-1)
@@ -167,10 +157,10 @@ def attention(query, key, value, mask=None, dropout=None):
     return torch.matmul(p_attn, value), p_attn
 
 
-class MultiHeadedAttention(nn.Module):
+class MultiHeadAttention(nn.Module):
     def __init__(self, h, d_model, dropout=0.1):
         "Take in model size and number of heads."
-        super(MultiHeadedAttention, self).__init__()
+        super(MultiHeadAttention, self).__init__()
         assert d_model % h == 0
         # We assume d_v always equals d_k
         self.d_k = d_model // h
@@ -182,32 +172,23 @@ class MultiHeadedAttention(nn.Module):
     def forward(self, query, key, value, mask=None):
         "Implements Figure 2"
         if mask is not None:
-            # Same mask applied to all h heads.
             mask = mask.unsqueeze(1)
         nbatches = query.size(0)
 
-        # 1) Do all the linear projections in batch from d_model => h x d_k
-        # Zip only goes through the first 3 Layers - Ioan
-        # Each matrix multiplications is done once and then split in heads
         query, key, value = \
             [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)
              for l, x in zip(self.linears, (query, key, value))]
 
-        # 2) Apply attention on all the projected vectors in batch.
         x, self.attn = attention(query, key, value, mask=mask,
                                  dropout=self.dropout)
 
-        # 3) "Concat" using a view and apply a final linear.
         x = x.transpose(1, 2).contiguous() \
             .view(nbatches, -1, self.h * self.d_k)
 
         return self.linears[-1](x)
 
 
-# %%
 class PositionwiseFeedForward(nn.Module):
-    "Implements FFN equation."
-
     def __init__(self, d_model, d_ff, dropout=0.1):
         super(PositionwiseFeedForward, self).__init__()
         self.w_1 = nn.Linear(d_model, d_ff)
@@ -220,7 +201,7 @@ class PositionwiseFeedForward(nn.Module):
 
 class Top1SparseMoEFFN(nn.Module):
     """
-    Switch Transformer 스타일 Top-1 Sparse MoE FeedForward Layer
+    Switch Transformer style Top-1 Sparse MoE FeedForward Layer
     """
 
     def __init__(self, d_model, d_ff, num_experts=4, dropout=0.2):
