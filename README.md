@@ -9,7 +9,7 @@
 </p>
 
 <p align="left">
-  <b>(a)</b> GO and sequence embeddings from a protein pair are concatenated and encoded through a Transformer encoder with sparse MoE layers.  
+  <b>(a)</b> Gene Ontology(GO) and sequence embeddings from a protein pair are concatenated and encoded through a Transformer encoder with sparse MoE layers.  
   The encoded representations are element-wise multiplied, followed by a weighted attention and a linear layer for final prediction.<br>
   <b>(b)</b> GO embeddings are derived from Node2Vec trained on a random walk corpus over the GO graph.  
   Red symbols next to GO terms indicate proteins annotated with those terms (e.g., $P_1$, $P_2$).<br>
