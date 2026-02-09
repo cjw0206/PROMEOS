@@ -3,6 +3,7 @@ import urllib.request
 import gzip
 import random
 from pathlib import Path
+from itertools import combinations
 
 random.seed(10)
 
@@ -60,7 +61,6 @@ def generate_dataset(protein_links_path, poz_intr_file_name, neg_intr_file_name,
     print('Saving NEGATIVE interactions to files...')
     save_interactions(neg_intr_file_name, negative_intr)
 def generate_negatives_fast(positive_pairs):
-    from itertools import combinations
 
     print("Generating candidate negative pairs...")
     proteins = list(set([p for pair in positive_pairs for p in pair]))
@@ -95,36 +95,5 @@ if __name__ == "__main__":
     poz_output = f'{folder}/{organism}.protein.links.v{version}.txt'
     neg_output = f'{folder}/{organism}.protein.negative.v{version}.txt'
 
-    ### optional
-    # url = f'https://stringdb-static.org/download/protein.links.v{version}/{organism}.protein.links.v{version}.txt.gz'
-    # Path("stringDB-files").mkdir(parents=True, exist_ok=True)
-    # download_file(url, link_file)
-
     print("STRING interaction file downloaded. Generating dataset...")
     generate_dataset(link_file, poz_output, neg_output)
-
-
-# -------------------------------
-# GO Ontology and Annotation Files
-# -------------------------------
-# print("\nDownloading Gene Ontology and annotation files...")
-#
-# folder = 'go-terms'
-# Path(folder).mkdir(parents=True, exist_ok=True)
-#
-# go_obo_url = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
-# go_obo_path = folder + '/go-basic.obo'
-# download_file(go_obo_url, go_obo_path)
-# print("GO ontology downloaded")
-#
-# # Download Human GO annotation
-# goa_human_url = 'http://geneontology.org/gene-associations/goa_human.gaf.gz'
-# goa_human_path = folder + '/goa_human.gaf.gz'
-# download_file(goa_human_url, goa_human_path)
-# print("Human GO annotation file downloaded")
-#
-# # Download Yeast GO annotation
-# goa_yeast_url = 'http://current.geneontology.org/annotations/sgd.gaf.gz'
-# goa_yeast_path = folder + '/sgd.gaf.gz'
-# download_file(goa_yeast_url, goa_yeast_path)
-# print("Yeast GO annotation file downloaded")

@@ -88,9 +88,6 @@ if __name__ == "__main__":
     poz_output = f'{folder}/{organism}.protein.links.400-600.v{version}.txt'
     neg_output = f'{folder}/{organism}.protein.negative.400-600.v{version}.txt'
 
-    # # Optional
-    # url = f'https://stringdb-static.org/download/protein.links.v{version}/{organism}.protein.links.v{version}.txt.gz'
-    # download_file(url, link_file)
 
     print("Generating STRING dataset (400 ≤ score < 600)...")
     generate_dataset(link_file, poz_output, neg_output, min_score=400, max_score=600)

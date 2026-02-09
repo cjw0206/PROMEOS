@@ -4,10 +4,6 @@ import collections
 import pandas as pd
 import numpy as np
 
-def download_ontology(url = 'http://release.geneontology.org/2018-09-05/ontology/go-basic.obo',
-                      save_path = r'go-basic.obo'):
-    urllib.request.urlretrieve(url, save_path)
-    return
 
 def obo_file_to_dict(filename):
     
