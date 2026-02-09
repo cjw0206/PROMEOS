@@ -159,10 +159,10 @@ for experts in experts_list:
             os.makedirs(save_dir, exist_ok=True)
 
             model = PROMEOS(EMB_DIM, 8, 3, 4 * EMB_DIM, dropout,using_esm2=True, num_experts=experts).to(device)
-            total_params = sum(p.numel() for p in model.parameters())
-            trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-            print(f"Total parameters: {total_params:,}")
-            print(f"Trainable parameters: {trainable_params:,}")
+            # total_params = sum(p.numel() for p in model.parameters())
+            # trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+            # print(f"Total parameters: {total_params:,}")
+            # print(f"Trainable parameters: {trainable_params:,}")
             optimizer = optim.AdamW(model.parameters(), lr=LR, weight_decay=weight_decay)
             criterion = nn.BCEWithLogitsLoss().to(device)
 
