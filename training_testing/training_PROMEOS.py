@@ -13,7 +13,7 @@ from datetime import datetime
 
 # Custom imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Models.PROMEOS_model import *
+from models.PROMEOS_model import *
 from datasets.dataset_manip import *
 from training_helper import *
 

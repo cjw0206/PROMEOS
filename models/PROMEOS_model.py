@@ -1,4 +1,4 @@
-from Models.harvard_transformer_ffn_moe import *
+from models.harvard_transformer_ffn_moe import *
 
 import torch
 import torch.nn as nn
