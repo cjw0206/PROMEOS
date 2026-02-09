@@ -135,15 +135,6 @@ def get_ppi_list(ppi_pth):
     return ppi
 
 
-# def get_max_len_seq(dataset):
-#     """Finds the protein with the most annotations and returns the size"""
-#     batch_features, batch_labels, batch_ids = zip(*dataset)
-#
-#     max_len = 0
-#     for i in range(len(batch_features)):
-#         max_len = max(max_len, len(batch_features[i][0]), len(batch_features[i][1]))
-#     return max_len
-
 def get_max_len_seq(dataset):
     """Finds the maximum number of GO annotations and adds 1 for ProtBERT token"""
     batch_features, batch_labels, batch_ids = zip(*dataset)
@@ -317,7 +308,7 @@ def get_dataset_split_stringDB_keep_ratio(poz_path, neg_path, protein_go_anno_pt
     random.shuffle(train_data)
     random.shuffle(valid_data)
     random.shuffle(test_data)
-    # save_ppi_splits_once(train_data, valid_data, test_data)   # save new split file
+    # save_ppi_splits_once(train_data, valid_data, test_data)   # if you need the same data split as PROMEOS, use this code once.
 
     def wrap_dataset(data):
         ppi, labels = zip(*data)
