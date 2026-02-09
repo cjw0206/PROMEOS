@@ -19,7 +19,8 @@
 ## Requirements
 
 - **Python**: 3.9  
-- **PyTorch**: 2.1.2 (with CUDA 12.1 support)  (pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121)
+- **PyTorch**: 2.1.2 (with CUDA 12.1 support)
+  (pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121)
 - **transformers**: 4.51.3  
 - **tokenizers**: 0.21.1  
 - **numpy**: 1.26.3  
