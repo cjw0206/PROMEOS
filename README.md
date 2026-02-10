@@ -5,7 +5,7 @@
 ## Abstract
 - **Task:** Protein–Protein Interaction (PPI) prediction.
 - **Motivation:** Existing deep learning methods often underuse complementary modalities, generalize poorly across experimental settings, and struggle with scalability during training.
-- **Proposed method:** **PROMEOS** — a multimodal PPI predictor that integrates **ontology** and **protein sequences**, using a **Mixture of Experts (MoE)** architecture.
+- **Proposed method:** a multimodal PPI predictor that integrates ontology and protein sequences, using a Mixture of Experts (MoE) architecture.
 - **Performance:**
   - Outperformed strong baselines across diverse setups.
   - Achieved +2.4% (S. cerevisiae) and +2.02% (H. sapiens) over the second-best model.
