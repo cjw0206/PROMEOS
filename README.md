@@ -7,14 +7,13 @@
 - **Motivation:** Existing deep learning methods often underuse complementary modalities, generalize poorly across experimental settings, and struggle with scalability during training.
 - **Proposed method:** a multimodal PPI predictor that integrates ontology and protein sequences, using a Mixture of Experts (MoE) architecture.
 - **Performance:**
-  - Outperformed strong baselines across diverse setups.
   - Achieved +2.4% (S. cerevisiae) and +2.02% (H. sapiens) over the second-best model.
   - Improved bidirectional cross-species prediction by +6.38%.
   - Improved cross-confidence validation accuracy by +7.9%.
 - **Efficiency:**
   - Despite >2× parameter count with sparse MoE, inference time increased by only +3.5%.
   - Removing the decoder reduced training time by ~10%.
-- **Takeaway:** A robust and efficient framework for PPI prediction with strong accuracy and generalization across settings.
+- **Conclusion:** A robust and efficient framework for PPI prediction with strong accuracy and generalization across settings.
 
 
 ## Model Architecture
