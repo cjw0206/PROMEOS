@@ -34,6 +34,11 @@
 - **tqdm**: 4.67.1  
 
 ## Datasets
-We share the datasets we generated under datasets/STRING_dataset/interaction-datasets/.
-Here, 4932 refers to S. cerevisiae, 9606 to H. sapiens, 7227 to D. melanogaster, and 10090 to M. musculus.
-If you want to generate new datasets, please run generate_string_dataset_v12.py and customize the options as needed.
+We share the datasets we generated under `datasets/STRING_dataset/interaction-datasets/`.  
+- **4932**: *S. cerevisiae*  
+- **9606**: *H. sapiens*  
+- **7227**: *D. melanogaster*  
+- **10090**: *M. musculus*  
+
+To generate new datasets, run `generate_string_dataset_v12.py` and adjust the options as needed.
+
