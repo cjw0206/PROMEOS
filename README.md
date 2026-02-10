@@ -42,3 +42,6 @@ We share the datasets we generated under `datasets/STRING_dataset/interaction-da
 
 To generate new datasets, run `generate_string_dataset_v12.py` and adjust the options as needed.
 
+Due to the 100MB GitHub file size limit, `9606_esm2_embeddings.pkl` and `10090_esm2_embeddings.pkl` cannot be uploaded to this repository.  
+Please either contact us to obtain these files, or generate the embeddings yourself using `ESM_mapping_generate.py`.
+
