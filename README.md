@@ -33,4 +33,7 @@
 - **seaborn** (optional, if used for plotting)  
 - **tqdm**: 4.67.1  
 
-
+## Datasets
+We share the datasets we generated under datasets/STRING_dataset/interaction-datasets/.
+Here, 4932 refers to S. cerevisiae, 9606 to H. sapiens, 7227 to D. melanogaster, and 10090 to M. musculus.
+If you want to generate new datasets, please run generate_string_dataset_v12.py and customize the options as needed.
