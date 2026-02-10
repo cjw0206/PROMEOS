@@ -30,7 +30,6 @@
 - **scikit-learn**: 1.6.1  
 - **scipy**: 1.13.1  
 - **matplotlib**: 3.9.4  
-- **seaborn** (optional, if used for plotting)  
 - **tqdm**: 4.67.1  
 
 ## Datasets
