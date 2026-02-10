@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9d5ae36a-f433-4b44-af58-360ab8c5c6f4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training_testing/PROMEOS_hyperparam_tune.py" beforeDir="false" afterPath="$PROJECT_DIR$/training_testing/PROMEOS_hyperparam_tune.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
