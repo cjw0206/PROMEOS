@@ -2,6 +2,12 @@
 
 **PROMEOS** is a multimodal learning framework for protein-protein interaction prediction, leveraging a Mixture of Experts to integrate ontology and sequence embeddings.
 
+doi: to be continue
+
+Journal: IEEE ACCESS (IF: 3.6)
+Article Submission Date: 13 March 2026
+Article accepted for publication: 25 May 2026
+
 ## Abstract
 - **Task:** Protein–Protein Interaction (PPI) prediction.
 - **Motivation:** Existing deep learning methods often underuse complementary modalities, generalize poorly across experimental settings, and struggle with scalability during training.
