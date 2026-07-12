@@ -4,7 +4,7 @@
 
 doi: https://ieeexplore.ieee.org/document/11552590 <br>
 
-Journal: IEEE ACCESS (IF: 3.6) <br>
+Journal: IEEE ACCESS (IF: 4.2) <br>
 Article Submission Date: 13 March 2026 <br>
 Article accepted for publication: 25 May 2026
 
